@@ -1,0 +1,24 @@
+Tilinumero	FI8514393500178887
+
+Kirjauspäivä	Arvopäivä	Maksupäivä	Määrä	Saaja/Maksaja	Tilinumero	BIC	Tapahtuma	Viite	Maksajan viite	Viesti	Kortinnumero	Kuitti	
+
+21.05.2015	21.05.2015	21.05.2015	-60,00	Ossi Sandberg	FI7257313450017693	OKOYFIHHXXX	Itsepalvelu			Kulukorvaus 5kpl nimilaatasta 			
+
+21.05.2015	21.05.2015	21.05.2015	-24,45	Ossi Sandberg	FI7257313450017693	OKOYFIHHXXX	Itsepalvelu			Kulukorvaus fuksijäynän juomatarvik keista 			
+
+21.05.2015	21.05.2015	21.05.2015	-15,76	KIVI PETRUS EMIL JOHANNES	224218-12579	NDEAFIHHXXX	Itsepalvelu			kulukorvaus fuksijäynätarvikkeista 			
+
+21.05.2015	21.05.2015	21.05.2015	-9,27	KIVI PETRUS EMIL JOHANNES	224218-12579	NDEAFIHHXXX	Itsepalvelu			kulukorvaus toimistotarvikkeista 			
+
+21.05.2015	21.05.2015	21.05.2015	-3,98	KIVI PETRUS EMIL JOHANNES	224218-12579	NDEAFIHHXXX	Itsepalvelu			Kulukorvaus fuksijäynätarvikkeista 			
+
+22.05.2015	22.05.2015	21.05.2015	10,00	LEMPINEN VILLE KALEVA			Pano			Jäsenmaksu 2015 Ville Lempinen 			
+
+22.05.2015	22.05.2015	22.05.2015	-3,00	Nordea Pankki Suomi Oyj	143957-11175313		Palvelumaksu ALV 0%			Päivittäispalvelut  4/2015 Pankkitunnukset       1 kpl    3,00 			
+
+26.05.2015	26.05.2015	25.05.2015	10,00	LUKKARINEN ELINA TUULIA			Pano			Jäsenmaksu, Elina Lukkarinen 			
+
+26.05.2015	26.05.2015	25.05.2015	10,00	ERONEN MIKKO EMIL			Pano			Jäsenmaksu 2015 Mikko Eronen 			
+
+26.05.2015	26.05.2015	26.05.2015	10,00	PARASCANDOLO RENATO			Pano			JASENMAKSU 2014 GIAMBATTISTA PARASC ANDOLO 		E	
+
