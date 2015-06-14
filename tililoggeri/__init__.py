@@ -1,5 +1,6 @@
 import file_operations
 import user_interface
+import calc_functions
 
 def main():
     print("Tililoggeri starting...")
@@ -13,8 +14,7 @@ def main():
     parsed_lines = []
     file_operations.parse_file(parse_info, filename, fileformat, parsed_lines)
 
-    for line in parsed_lines:
-        print(line)
+    calc_functions.calculate_sum(parsed_lines)
     print("Tililoggeri exiting...")
     return
 
