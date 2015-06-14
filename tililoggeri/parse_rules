@@ -1,0 +1,25 @@
+parse_rules=nordea
+
+field_separator='tab'
+
+transaction_startline=2
+
+keyline_start=
+
+Kirjauspäivä=
+Arvopäivä=
+Maksupäivä=
+Määrä=
+Saaja/Maksaja=
+Tilinumero=
+BIC=
+Tapahtuma=
+Viite=
+Maksajan viite=
+Viesti=
+Kortinnumero=
+Kuitti=	
+
+keyline_stop=
+
+parse_rules_stop=
