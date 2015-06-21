@@ -1,4 +1,5 @@
 local instructions = require "parse_instructions"
+local utils = require "pl.utils"
 
 
 function main()
@@ -26,6 +27,10 @@ function parse_file(instructions, filename, transactions)
     for key,value in pairs(lines) do
         if value == "\13" then
             lines[key] = nil
+        else
+            splitline = {}
+            splitline = utils.split(value, "\9")
+            lines[key] = splitline
         end
     end
 
