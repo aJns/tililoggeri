@@ -7,10 +7,12 @@ function main()
     io.write("Enter file format, eg. bank: ")
     fformat = io.read()
 
-    parse_file(i, "test.txt", ff, tr)
+    transactions = {}
+
+    parse_file(instructions.nordea, "test.txt", transactions)
 end
 
-function parse_file(instructions, filename, fileformat, transactions)
+function parse_file(instructions, filename, transactions)
     local file = assert(io.open(filename, "r"))
     
     local lines = {} 
@@ -20,9 +22,16 @@ function parse_file(instructions, filename, fileformat, transactions)
 
     file:close()
 
+    --remove empty lines, \13 equals \n
+    for key,value in pairs(lines) do
+        if value == "\13" then
+            lines[key] = nil
+        end
+    end
+
+
     require 'pl.pretty'.dump(lines)
 
-    return
 end
 
 main()
