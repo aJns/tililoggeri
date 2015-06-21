@@ -30,7 +30,12 @@ function parse_file(instructions, filename, transactions)
         else
             splitline = {}
             splitline = utils.split(value, "\9")
-            lines[key] = splitline
+            if (splitline[1] == instructions.remove[1] or 
+                splitline[1] == instructions.remove[2]) then
+                lines[key] = nil
+            else
+                lines[key] = splitline
+            end
         end
     end
 

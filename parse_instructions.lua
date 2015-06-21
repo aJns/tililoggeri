@@ -1,6 +1,7 @@
 local parse_instructions = {}
 
-parse_instructions.nordea = {separator="tab", startline=2}
+parse_instructions.nordea = {separator="tab"}
+parse_instructions.nordea.remove = {"Tilinumero", "Kirjauspäivä"}
 parse_instructions.nordea.keyline = {"Kirjauspäivä",
 "Arvopäivä",
 "Maksupäivä",
