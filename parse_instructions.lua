@@ -15,5 +15,11 @@ parse_instructions.nordea.keyline = {"Kirjauspäivä",
 "Viesti",
 "Kortinnumero",
 "Kuitti"}
+parse_instructions.nordea.format = {date="Maksupäivä",
+amount="Määrä",
+peer="Saaja/Maksaja",
+peer_account="Tilinumero",
+code="Viite",
+message="Viesti"}
 
 return parse_instructions
