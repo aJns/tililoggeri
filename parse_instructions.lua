@@ -21,5 +21,7 @@ peer="Saaja/Maksaja",
 peer_account="Tilinumero",
 code="Viite",
 message="Viesti"}
+parse_instructions.nordea.format.dateformat = {separator = ".",
+order = {"d","M","y"}}
 
 return parse_instructions
