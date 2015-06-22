@@ -12,7 +12,11 @@ function analysis.monthly_netsum(transactions)
     monthly = {}
     current_month = 0
     for key,transaction in ipairs(transactions) do
-        month = transaction.date:month() .. "-" .. transaction.date:year()
+        if transaction.date:month() < 10 then
+            month = "0" .. transaction.date:month() .. "-" .. transaction.date:year()
+        else
+            month = transaction.date:month() .. "-" .. transaction.date:year()
+        end
         if current_month == month then
             temp_sum = monthly[month] 
             temp_sum = temp_sum + transaction.amount
@@ -22,6 +26,7 @@ function analysis.monthly_netsum(transactions)
             current_month = month
         end
     end
+
     return monthly
 end
 
