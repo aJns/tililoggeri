@@ -15,8 +15,10 @@ function main()
     end
 
     transactions = parse.format_transactions(instructions.nordea.format, parsed_lines)
+    
+    monthly_sums = analysis.monthly_netsum(transactions)
 
-    print("netsum:", analysis.netsum(transactions))
+    require "pl.pretty".dump(monthly_sums)
 
 end
 
