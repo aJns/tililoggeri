@@ -2,7 +2,6 @@ local parse_functions = {}
 local utils = require "pl.utils"
 local stringx = require "pl.stringx"
 
-
 --parse the file for transactions
 function parse_functions.parse_file(instructions, filename, parsed_lines)
     local file = io.open(filename, "r")
@@ -10,7 +9,7 @@ function parse_functions.parse_file(instructions, filename, parsed_lines)
         print("Couldn't open ", filename)
         return false
     end
-    
+
     local lines = {} 
     for line in file:lines() do
         table.insert(lines, line)
@@ -59,39 +58,34 @@ function parse_functions.format_transactions(format, parsed_lines)
                 if column == key then
                     if fkey == "date" then
                         transaction[fkey] = get_date(value, format.dateformat)
-                    elseif fkey == "amount" then
-                        transaction[fkey] = stringx.replace(value, ",", ".")
-                    else
-                        transaction[fkey] = value
+                        elseif fkey == "amount" then
+                            transaction[fkey] = stringx.replace(value, ",", ".")
+                        else
+                            transaction[fkey] = value
+                        end
                     end
                 end
             end
+            table.insert(transactions,transaction)
         end
-        table.insert(transactions,transaction)
-    end
-    return transactions
-end
-
-function get_date(date_string, dateformat) 
-    date = require "pl.Date"{}
-    split_date = utils.split(date_string, dateformat.separator, "plain")
-    for i,value in pairs(dateformat.order) do
-        if value == "d" then
-            date:day(tonumber(split_date[i]))
-        elseif value == "M" then
-            date:month(tonumber(split_date[i]))
-        elseif value == "y" then
-            date:year(tonumber(split_date[i]))
-        end
+        return transactions
     end
 
-    return date
-end
+    function get_date(date_string, dateformat) 
+        date = require "pl.Date"{}
+        split_date = utils.split(date_string, dateformat.separator, "plain")
+        for i,value in pairs(dateformat.order) do
+            if value == "d" then
+                date:day(tonumber(split_date[i]))
+                elseif value == "M" then
+                    date:month(tonumber(split_date[i]))
+                    elseif value == "y" then
+                        date:year(tonumber(split_date[i]))
+                    end
+                end
 
+                return date
+            end
 
-
-    
-    
-    
-return parse_functions
+            return parse_functions
 

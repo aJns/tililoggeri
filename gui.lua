@@ -1,5 +1,7 @@
+local gui = {}
+
 ui = require "tek.ui"
-ui.Application:new
+gui.main_window = ui.Application:new
 {
   Children =
   {
@@ -18,4 +20,7 @@ ui.Application:new
       }
     }
   }
-}:run()
+}
+
+
+return gui

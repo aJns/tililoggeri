@@ -1,7 +1,7 @@
 local instructions = require "parse_instructions"
 local parse = require "parse_functions"
 local analysis = require "analysis"
-
+local gui = require "gui"
 
 function main()
     io.write("Enter account transactions file name: ")
@@ -20,12 +20,8 @@ function main()
 
     require "pl.pretty".dump(monthly_sums)
 
+    gui.main_window:run()
+
 end
-
-
-
-
-
-
 
 main()
