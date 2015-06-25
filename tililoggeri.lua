@@ -15,11 +15,16 @@ function main()
     end
 
     transactions = parse.format_transactions(instructions.nordea.format, parsed_lines)
-    
+
     monthly_sums = analysis.monthly_netsum(transactions)
+    monthly_media = analysis.median_monthly_netsum(transactions)
 
+    print("Monthly netsums")
     require "pl.pretty".dump(monthly_sums)
+    print("Monthly netsum median")
+    require "pl.pretty".dump(monthly_media)
 
+    gui.set_transactions(transactions)
     gui.main_window:run()
 
 end

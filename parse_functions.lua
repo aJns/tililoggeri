@@ -50,9 +50,9 @@ end
 --format the parsed lines in to a more usable transactions table,
 --removing unnecessary columns and setting types
 function parse_functions.format_transactions(format, parsed_lines)
-    transactions = {}
+    local transactions = {}
     for i,line in pairs(parsed_lines) do
-        transaction = {}
+        local transaction = {}
         for fkey,column in pairs(format) do
             for key,value in pairs(line) do
                 if column == key then
@@ -72,8 +72,8 @@ function parse_functions.format_transactions(format, parsed_lines)
     end
 
     function get_date(date_string, dateformat) 
-        date = require "pl.Date"{}
-        split_date = utils.split(date_string, dateformat.separator, "plain")
+        local date = require "pl.Date"{}
+        local split_date = utils.split(date_string, dateformat.separator, "plain")
         for i,value in pairs(dateformat.order) do
             if value == "d" then
                 date:day(tonumber(split_date[i]))
