@@ -74,4 +74,32 @@ function transaction_table.monthly_sums()
     return monthly
 end
 
+function transaction_table.daily_sums()
+    local daily = {}
+
+    for year, year_table in pairs(transaction_table.years) do
+        for month, month_table in pairs(year_table.months) do
+            local month_key = ""
+            if month < 10 then
+                month_key = "0" .. month .. "-" .. year
+            else
+                month_key = month .. "-" .. year
+            end
+            for day, day_table in pairs(month_table.days) do
+                local sum = 0
+                local day_key = ""
+                if day < 10 then
+                    day_key = "0" .. day .. "-" .. month_key
+                else
+                    day_key = day .. "-" .. month_key
+                end
+                sum = sum + day_table.sum
+                daily[day_key] = sum
+            end
+        end
+    end
+
+    return daily
+end
+
 return transaction_table
