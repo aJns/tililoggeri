@@ -58,8 +58,8 @@ function transaction_table.monthly_sums()
     local monthly = {}
 
     for year, year_table in pairs(transaction_table.years) do
-        local sum = 0
         for month, month_table in pairs(year_table.months) do
+            local sum = 0
             local month_key = ""
             if month < 10 then
                 month_key = "0" .. month .. "-" .. year

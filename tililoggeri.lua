@@ -17,31 +17,24 @@ function main()
 
     transactions = parse.format_transactions(instructions.nordea, parsed_lines)
 
-    total_sum = analysis.netsum(transactions)
-    monthly_sums = analysis.monthly_netsum(transactions)
-    monthly_median = analysis.median_monthly_netsum(transactions)
-    monthly_average = analysis.average_monthly_netsum(transactions)
+    trans_table.init(transactions)
 
-    --print("Monthly netsums")
-    --require "pl.pretty".dump(monthly_sums)
-    --print("Total sum")
-    --print(total_sum)
-    --print("Monthly netsum median")
-    --print(monthly_median)
-    --print("Monthly netsum average")
-    --print(monthly_average)
+    total_sum = analysis.netsum(transactions)
+    monthly_sums = trans_table.monthly_sums()
+    monthly_median = analysis.median_monthly_netsum(trans_table)
+    monthly_average = analysis.average_monthly_netsum(trans_table)
+
+    print("Monthly netsums")
+    require "pl.pretty".dump(monthly_sums)
+    print("Total sum")
+    print(total_sum)
+    print("Monthly netsum median")
+    print(monthly_median)
+    print("Monthly netsum average")
+    print(monthly_average)
 
     --gui.set_transactions(transactions)
     --gui.main_window:run()
-
-    print("Monthly netsums (analysis)")
-    require "pl.pretty".dump(monthly_sums)
-
-    trans_table.init(transactions)
-    monthly_sums = trans_table.monthly_sums()
-
-    print("Monthly sums (transaction_table)")
-    require "pl.pretty".dump(monthly_sums)
 
 end
 

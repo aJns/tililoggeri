@@ -9,15 +9,8 @@ function analysis.netsum(transactions)
     return tonumber(string.format("%.2f", sum))
 end
 
-function analysis.monthly_netsum(transactions)
-    local monthly = {}
-    monthly = require "transaction_table".init(transactions).monthly_sums()
-    monthly = require "pl.tablex".deepcopy(monthly)
-    return monthly
-end
-
-function analysis.median_monthly_netsum(transactions)
-    local monthly = analysis.monthly_netsum(transactions)
+function analysis.median_monthly_netsum(trans_table)
+    local monthly = trans_table.monthly_sums()
     remove_monthly_extremes(monthly, (tablex.size(monthly) - 1) / 2)
     local median = 0
     for month, sum in pairs(monthly) do
@@ -27,8 +20,8 @@ function analysis.median_monthly_netsum(transactions)
     return median
 end
 
-function analysis.average_monthly_netsum(transactions)
-    local monthly = analysis.monthly_netsum(transactions)
+function analysis.average_monthly_netsum(trans_table)
+    local monthly = trans_table.monthly_sums()
     local average = 0
     for month, sum in pairs(monthly) do
         average = average + sum
