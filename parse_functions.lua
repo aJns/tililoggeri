@@ -47,9 +47,10 @@ function parse_functions.parse_file(instructions, filename, parsed_lines)
     return true
 end
 
---format the parsed lines in to a more usable transactions table,
+--format the parsed lines in to a more usable transactions list,
 --removing unnecessary columns and setting types
-function parse_functions.format_transactions(format, parsed_lines)
+function parse_functions.format_transactions(instructions, parsed_lines)
+    local format = instructions.format
     local transactions = {}
     for i,line in pairs(parsed_lines) do
         local transaction = {}
@@ -58,34 +59,41 @@ function parse_functions.format_transactions(format, parsed_lines)
                 if column == key then
                     if fkey == "date" then
                         transaction[fkey] = get_date(value, format.dateformat)
-                        elseif fkey == "amount" then
-                            transaction[fkey] = stringx.replace(value, ",", ".")
-                        else
-                            transaction[fkey] = value
-                        end
+                    elseif fkey == "amount" then transaction[fkey] = stringx.replace(value, ",", ".") else
+                        transaction[fkey] = value
                     end
                 end
             end
-            table.insert(transactions,transaction)
         end
-        return transactions
+--       transaction.original = require "pl.tablex".deepcopy(line)
+--       transaction.stringID = get_stringID(line, instructions.keyline)
+        table.insert(transactions,transaction)
+    end
+    return transactions
+end
+
+function get_date(date_string, dateformat) 
+    local date = require "pl.Date"{}
+    local split_date = utils.split(date_string, dateformat.separator, "plain")
+    for i,value in pairs(dateformat.order) do
+        if value == "d" then
+            date:day(tonumber(split_date[i]))
+        elseif value == "M" then
+            date:month(tonumber(split_date[i]))
+        elseif value == "y" then
+            date:year(tonumber(split_date[i]))
+        end
     end
 
-    function get_date(date_string, dateformat) 
-        local date = require "pl.Date"{}
-        local split_date = utils.split(date_string, dateformat.separator, "plain")
-        for i,value in pairs(dateformat.order) do
-            if value == "d" then
-                date:day(tonumber(split_date[i]))
-                elseif value == "M" then
-                    date:month(tonumber(split_date[i]))
-                    elseif value == "y" then
-                        date:year(tonumber(split_date[i]))
-                    end
-                end
+    return date
+end
 
-                return date
-            end
+function get_stringID(transaction, keyline)
+    local stringID = ""
+    for i, key in ipairs(keyline) do
+        stringID = stringID .. transaction[key]
+    end
+    return stringID
+end
 
-            return parse_functions
-
+return parse_functions

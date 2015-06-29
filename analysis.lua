@@ -6,7 +6,7 @@ function analysis.netsum(transactions)
     for key,transaction in pairs(transactions) do
         sum = sum + transaction.amount
     end
-    return sum
+    return tonumber(string.format("%.2f", sum))
 end
 
 function analysis.monthly_netsum(transactions)
