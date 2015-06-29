@@ -65,8 +65,8 @@ function parse_functions.format_transactions(instructions, parsed_lines)
                 end
             end
         end
---       transaction.original = require "pl.tablex".deepcopy(line)
---       transaction.stringID = get_stringID(line, instructions.keyline)
+        transaction.original = require "pl.tablex".deepcopy(line)
+        transaction.stringID = get_stringID(line, instructions.keyline)
         table.insert(transactions,transaction)
     end
     return transactions

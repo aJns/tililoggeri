@@ -11,23 +11,8 @@ end
 
 function analysis.monthly_netsum(transactions)
     local monthly = {}
-    local current_month = 0
-    for key,transaction in ipairs(transactions) do
-        if transaction.date:month() < 10 then
-            month = "0" .. transaction.date:month() .. "-" .. transaction.date:year()
-        else
-            month = transaction.date:month() .. "-" .. transaction.date:year()
-        end
-        if current_month == month then
-            temp_sum = monthly[month] 
-            temp_sum = temp_sum + transaction.amount
-            monthly[month] = temp_sum
-        else
-            monthly[month] = 0
-            current_month = month
-        end
-    end
-
+    monthly = require "transaction_table".init(transactions).monthly_sums()
+    monthly = require "pl.tablex".deepcopy(monthly)
     return monthly
 end
 

@@ -22,19 +22,26 @@ function main()
     monthly_median = analysis.median_monthly_netsum(transactions)
     monthly_average = analysis.average_monthly_netsum(transactions)
 
---   print("Monthly netsums")
---   require "pl.pretty".dump(monthly_sums)
---   print("Total sum")
---   print(total_sum)
---   print("Monthly netsum median")
---   print(monthly_median)
---   print("Monthly netsum average")
---   print(monthly_average)
+    --print("Monthly netsums")
+    --require "pl.pretty".dump(monthly_sums)
+    --print("Total sum")
+    --print(total_sum)
+    --print("Monthly netsum median")
+    --print(monthly_median)
+    --print("Monthly netsum average")
+    --print(monthly_average)
 
     --gui.set_transactions(transactions)
     --gui.main_window:run()
-    
+
+    print("Monthly netsums (analysis)")
+    require "pl.pretty".dump(monthly_sums)
+
     trans_table.init(transactions)
+    monthly_sums = trans_table.monthly_sums()
+
+    print("Monthly sums (transaction_table)")
+    require "pl.pretty".dump(monthly_sums)
 
 end
 
