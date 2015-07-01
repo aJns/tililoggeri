@@ -54,11 +54,29 @@ function calculate_sum(trans_arg)
     return sum
 end
 
+function transaction_table.yearly_sums()
+    local yearly = {}
+
+    for year, year_table in pairs(transaction_table.years) do
+        sum_table = {}
+        local sum = 0
+        local year_key = ""
+        year_key = year
+        sum = sum + year_table.sum
+        sum_table.sum = sum
+        sum_table.year_key = year_key
+        table.insert(yearly, sum_table)
+    end
+
+    return yearly
+end
+
 function transaction_table.monthly_sums()
     local monthly = {}
 
     for year, year_table in pairs(transaction_table.years) do
         for month, month_table in pairs(year_table.months) do
+            sum_table = {}
             local sum = 0
             local month_key = ""
             if month < 10 then
@@ -67,7 +85,9 @@ function transaction_table.monthly_sums()
                 month_key = month .. "-" .. year
             end
             sum = sum + month_table.sum
-            monthly[month_key] = sum
+            sum_table.sum = sum
+            sum_table.month_key = month_key
+            table.insert(monthly, sum_table)
         end
     end
 
@@ -79,6 +99,7 @@ function transaction_table.daily_sums()
 
     for year, year_table in pairs(transaction_table.years) do
         for month, month_table in pairs(year_table.months) do
+            sum_table = {}
             local month_key = ""
             if month < 10 then
                 month_key = "0" .. month .. "-" .. year
@@ -94,7 +115,9 @@ function transaction_table.daily_sums()
                     day_key = day .. "-" .. month_key
                 end
                 sum = sum + day_table.sum
-                daily[day_key] = sum
+                sum_table.sum = sum
+                sum_table.day_key = day_key
+                table.insert(daily, sum_table)
             end
         end
     end

@@ -1,10 +1,6 @@
 local gui = {}
 
-local transactionList = {}
-
-function gui.set_transactions(transactions)
-  transactionList = transactions
-end
+local trans_table = {}
 
 local ui = require "tek.ui"
 gui.main_window = ui.Application:new
@@ -27,6 +23,5 @@ gui.main_window = ui.Application:new
     }
   }
 }
-
 
 return gui

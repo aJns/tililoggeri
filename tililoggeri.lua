@@ -19,25 +19,30 @@ function main()
 
     trans_table.init(transactions)
 
-    total_sum = analysis.netsum(transactions)
+--   total_sum = analysis.netsum(transactions)
     monthly_sums = trans_table.monthly_sums()
-    daily_sums = trans_table.daily_sums()
-    monthly_median = analysis.median_monthly_netsum(trans_table)
-    monthly_average = analysis.average_monthly_netsum(trans_table)
+--   daily_sums = trans_table.daily_sums()
+   monthly_median = analysis.median_monthly_netsum(trans_table)
+--   monthly_average = analysis.average_monthly_netsum(trans_table)
 
-    print("Monthly netsums")
-    require "pl.pretty".dump(monthly_sums)
-    print("Daily netsums")
-    require "pl.pretty".dump(daily_sums)
-    print("Total sum")
-    print(total_sum)
-    print("Monthly netsum median")
-    print(monthly_median)
-    print("Monthly netsum average")
-    print(monthly_average)
+    yearly_sums = trans_table.yearly_sums()
+
+--   print("Monthly netsums")
+--   require "pl.pretty".dump(monthly_sums)
+--   print("Daily netsums")
+--   require "pl.pretty".dump(daily_sums)
+--   print("Total sum")
+--   print(total_sum)
+--   print("Monthly netsum median")
+--   print(monthly_median)
+--   print("Monthly netsum average")
+--   print(monthly_average)
 
     --gui.set_transactions(transactions)
     --gui.main_window:run()
+
+    require "pl.pretty".dump(yearly_sums)
+    require "pl.pretty".dump(monthly_sums)
 
 end
 
