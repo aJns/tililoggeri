@@ -21,6 +21,8 @@ function sort_transactions()
         end
         table.insert(year_list.transactions, line)
         year_list.sum = calculate_sum(year_list.transactions)
+        year_list.revenue = calculate_revenue(year_list.transactions)
+        year_list.expenses = calculate_expenses(year_list.transactions)
 
         local month = line.date:month()
         local month_list = transaction_table.years[year].months[month]
@@ -32,6 +34,8 @@ function sort_transactions()
         end
         table.insert(month_list.transactions, line)
         month_list.sum = calculate_sum(month_list.transactions)
+        month_list.revenue = calculate_revenue(month_list.transactions)
+        month_list.expenses = calculate_expenses(month_list.transactions)
 
         local day = line.date:day()
         local day_list = transaction_table.years[year].months[month].days[day]
@@ -42,7 +46,8 @@ function sort_transactions()
         end
         table.insert(day_list.transactions, line)
         day_list.sum = calculate_sum(day_list.transactions)
-
+        day_list.revenue = calculate_revenue(day_list.transactions)
+        day_list.expenses = calculate_expenses(day_list.transactions)
     end
 end
 
@@ -52,6 +57,26 @@ function calculate_sum(trans_arg)
         sum = sum + transaction.amount
     end
     return sum
+end
+
+function calculate_revenue(trans_arg)
+    local revenue = 0
+    for i, transaction in pairs(trans_arg) do
+        if (revenue > 0) then
+            revenue = revenue + transaction.amount
+        end
+    end
+    return revenue
+end
+
+function calculate_expenses(trans_arg)
+    local expenses = 0
+    for i, transaction in pairs(trans_arg) do
+        if (expenses < 0) then
+            expenses = expenses + transaction.amount
+        end
+    end
+    return revenue
 end
 
 function transaction_table.yearly_sums()

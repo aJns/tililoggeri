@@ -13,7 +13,7 @@ function analysis.median_monthly_netsum(trans_table)
     local monthly = trans_table.monthly_sums()
     monthly = get_monthly_pruned(monthly, (tablex.size(monthly) - 1) / 2)
     local median = 0
-    for i, month in ipairs(monthly) do
+    for i, month in pairs(monthly) do
         median = median + month.sum
     end
     median = median / tablex.size(monthly)

@@ -1,8 +1,9 @@
 local gui = {}
+local ui = require "tek.ui"
+local utils = require "pl.utils"
 
 local trans_table = {}
 
-local ui = require "tek.ui"
 gui.main_window = ui.Application:new
 {
   Children =
@@ -12,12 +13,14 @@ gui.main_window = ui.Application:new
       Title = "Hello",
       Children =
       {
-        ui.Text:new
+        ui.Button:new
         {
           Text = "Hello, World!",
-          Class = "button",
-          Mode = "button",
-          Width = "auto"
+          Width = "auto",
+          onClick = function(self)
+            print "Hello, World!"
+            utils.quit("Exiting...")
+          end
         }
       }
     }
