@@ -1,15 +1,20 @@
 local analysis = {}
 local tablex = require "pl.tablex"
 
-function analysis.netsum(transactions)
-    local sum = 0
-    for key,transaction in pairs(transactions) do
-        sum = sum + transaction.amount
-    end
-    return tonumber(string.format("%.2f", sum))
+analysis.year = {}
+analysis.month = {}
+analysis.day = {}
+
+function analysis.init(trans_table)
+   analysis.year.sums = trans_table.yearly_sums()
+   analysis.month.sums = trans_table.monthly_sums()
+   analysis.day.sums = trans_table.daily_sums()
+
+   analysis.month.avg_sum = average_monthly_netsum(trans_table)
+   analysis.month.med_sum = median_monthly_netsum(trans_table)
 end
 
-function analysis.median_monthly_netsum(trans_table)
+function median_monthly_netsum(trans_table)
     local monthly = trans_table.monthly_sums()
     monthly = get_monthly_pruned(monthly, (tablex.size(monthly) - 1) / 2)
     local median = 0
@@ -20,7 +25,7 @@ function analysis.median_monthly_netsum(trans_table)
     return median
 end
 
-function analysis.average_monthly_netsum(trans_table)
+function average_monthly_netsum(trans_table)
     local monthly = trans_table.monthly_sums()
     local average = 0
     for i, month in ipairs(monthly) do
@@ -28,9 +33,6 @@ function analysis.average_monthly_netsum(trans_table)
     end
     average = average / tablex.size(monthly)
     return tonumber(string.format("%.2f", average))
-end
-
-function analysis.calculate_peers()
 end
 
 function get_monthly_pruned(monthly_arg, remove_count)

@@ -15,15 +15,16 @@ function lua_main.init()
 
     trans_table.init(transactions)
 
-    total_sum = analysis.netsum(transactions)
+    analysis.init(trans_table)
 
-    yearly_sums = trans_table.yearly_sums()
-    monthly_sums = trans_table.monthly_sums()
-    daily_sums = trans_table.daily_sums()
+end
 
-    monthly_median = analysis.median_monthly_netsum(trans_table)
-    monthly_average = analysis.average_monthly_netsum(trans_table)
+function lua_main.get_trans_table() 
+    return trans_table
+end
 
+function lua_main.get_analysis()
+    return analysis
 end
 
 return lua_main
