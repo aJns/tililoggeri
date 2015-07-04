@@ -5,6 +5,8 @@ analysis.year = {}
 analysis.month = {}
 analysis.day = {}
 
+analysis.current_month = {}
+
 function analysis.init(trans_table)
    analysis.year.sums = trans_table.yearly_sums()
    analysis.month.sums = trans_table.monthly_sums()
@@ -26,6 +28,38 @@ function analysis.init(trans_table)
 
    analysis.month.avg_exp = average_monthly_netexpense(trans_table)
    analysis.month.med_exp = median_monthly_netexpense(trans_table)
+
+   init_current_month(trans_table)
+end
+
+function init_current_month(trans_table)
+    local years = tablex.keys(trans_table.years)
+    local year = "0"
+    while tablex.size(years) > 1 do
+        for i, key in pairs(years) do
+            if tonumber(key) > tonumber(year) then
+                year = key
+            else
+                years[i] = nil
+            end
+        end
+    end
+
+    local months = tablex.keys(trans_table.years[year].months)
+    local month = "0"
+    while tablex.size(months) > 1 do
+        for i, key in pairs(months) do
+            if tonumber(key) > tonumber(month) then
+                month = key
+            else
+                months[i] = nil
+            end
+        end
+    end
+
+    analysis.current_month.sum = trans_table.years[year].months[month].sum
+    analysis.current_month.exp = trans_table.years[year].months[month].expenses
+    analysis.current_month.rev = trans_table.years[year].months[month].revenue
 end
 
 -- Sum functions
