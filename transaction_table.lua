@@ -62,7 +62,8 @@ end
 function calculate_revenue(trans_arg)
     local revenue = 0
     for i, transaction in pairs(trans_arg) do
-        if (revenue > 0) then
+        local amount = tonumber(transaction.amount)
+        if (amount > 0) then
             revenue = revenue + transaction.amount
         end
     end
@@ -72,13 +73,16 @@ end
 function calculate_expenses(trans_arg)
     local expenses = 0
     for i, transaction in pairs(trans_arg) do
-        if (expenses < 0) then
+        local amount = tonumber(transaction.amount)
+        if (amount < 0) then
             expenses = expenses + transaction.amount
         end
     end
-    return revenue
+    return expenses
 end
 
+-- Sum functions: Calculate the net sum of years, months and days and return
+-- a list containing them and a date
 function transaction_table.yearly_sums()
     local yearly = {}
 
@@ -149,5 +153,154 @@ function transaction_table.daily_sums()
 
     return daily
 end
+-- sum functions
+
+-- Revenue functions: Calculate the net revenue of years, months and days and 
+-- return a list containing them and a date
+function transaction_table.yearly_revenues()
+    local yearly = {}
+
+    for year, year_table in pairs(transaction_table.years) do
+        revenue_table = {}
+        local revenue = 0
+        local year_key = ""
+        year_key = year
+        revenue = revenue + year_table.revenue
+        revenue_table.revenue = revenue
+        revenue_table.year_key = year_key
+        table.insert(yearly, revenue_table)
+    end
+
+    return yearly
+end
+
+function transaction_table.monthly_revenues()
+    local monthly = {}
+
+    for year, year_table in pairs(transaction_table.years) do
+        for month, month_table in pairs(year_table.months) do
+            revenue_table = {}
+            local revenue = 0
+            local month_key = ""
+            if month < 10 then
+                month_key = "0" .. month .. "-" .. year
+            else
+                month_key = month .. "-" .. year
+            end
+            revenue = revenue + month_table.revenue
+            revenue_table.revenue = revenue
+            revenue_table.month_key = month_key
+            table.insert(monthly, revenue_table)
+        end
+    end
+
+    return monthly
+end
+
+function transaction_table.daily_revenues()
+    local daily = {}
+
+    for year, year_table in pairs(transaction_table.years) do
+        for month, month_table in pairs(year_table.months) do
+            revenue_table = {}
+            local month_key = ""
+            if month < 10 then
+                month_key = "0" .. month .. "-" .. year
+            else
+                month_key = month .. "-" .. year
+            end
+            for day, day_table in pairs(month_table.days) do
+                local revenue = 0
+                local day_key = ""
+                if day < 10 then
+                    day_key = "0" .. day .. "-" .. month_key
+                else
+                    day_key = day .. "-" .. month_key
+                end
+                revenue = revenue + day_table.revenue
+                revenue_table.revenue = revenue
+                revenue_table.day_key = day_key
+                table.insert(daily, revenue_table)
+            end
+        end
+    end
+
+    return daily
+end
+-- revenue functions
+
+-- Expense functions: Calculate the net expense of years, months and days and 
+-- return a list containing them and a date
+function transaction_table.yearly_expenses()
+    local yearly = {}
+
+    for year, year_table in pairs(transaction_table.years) do
+        expense_table = {}
+        local expense = 0
+        local year_key = ""
+        year_key = year
+        expense = expense + year_table.expenses
+        expense_table.expense = expense
+        expense_table.year_key = year_key
+        table.insert(yearly, expense_table)
+    end
+
+    return yearly
+end
+
+function transaction_table.monthly_expenses()
+    local monthly = {}
+
+    for year, year_table in pairs(transaction_table.years) do
+        for month, month_table in pairs(year_table.months) do
+            expense_table = {}
+            local expense = 0
+            local month_key = ""
+            if month < 10 then
+                month_key = "0" .. month .. "-" .. year
+            else
+                month_key = month .. "-" .. year
+            end
+            expense = expense + month_table.expenses
+            expense_table.expense = expense
+            expense_table.month_key = month_key
+            table.insert(monthly, expense_table)
+        end
+    end
+
+    return monthly
+end
+
+function transaction_table.daily_expenses()
+    local daily = {}
+
+    for year, year_table in pairs(transaction_table.years) do
+        for month, month_table in pairs(year_table.months) do
+            expense_table = {}
+            local month_key = ""
+            if month < 10 then
+                month_key = "0" .. month .. "-" .. year
+            else
+                month_key = month .. "-" .. year
+            end
+            for day, day_table in pairs(month_table.days) do
+                local expense = 0
+                local day_key = ""
+                if day < 10 then
+                    day_key = "0" .. day .. "-" .. month_key
+                else
+                    day_key = day .. "-" .. month_key
+                end
+                expense = expense + day_table.expenses
+                expense_table.expense = expense
+                expense_table.day_key = day_key
+                table.insert(daily, expense_table)
+            end
+        end
+    end
+
+    return daily
+end
+-- expense functions
 
 return transaction_table
