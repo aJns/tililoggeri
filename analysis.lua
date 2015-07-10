@@ -34,7 +34,7 @@ end
 
 function init_current_month(trans_table)
     local years = tablex.keys(trans_table.years)
-    local year = "0"
+    local year = years[1]
     while tablex.size(years) > 1 do
         for i, key in pairs(years) do
             if tonumber(key) > tonumber(year) then
@@ -46,7 +46,7 @@ function init_current_month(trans_table)
     end
 
     local months = tablex.keys(trans_table.years[year].months)
-    local month = "0"
+    local month = months[1]
     while tablex.size(months) > 1 do
         for i, key in pairs(months) do
             if tonumber(key) > tonumber(month) then
