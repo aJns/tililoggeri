@@ -161,7 +161,7 @@ function transaction_table.yearly_revenues()
     local yearly = {}
 
     for year, year_table in pairs(transaction_table.years) do
-        revenue_table = {}
+        local revenue_table = {}
         local revenue = 0
         local year_key = ""
         year_key = year
@@ -179,7 +179,7 @@ function transaction_table.monthly_revenues()
 
     for year, year_table in pairs(transaction_table.years) do
         for month, month_table in pairs(year_table.months) do
-            revenue_table = {}
+            local revenue_table = {}
             local revenue = 0
             local month_key = ""
             if month < 10 then
@@ -202,7 +202,6 @@ function transaction_table.daily_revenues()
 
     for year, year_table in pairs(transaction_table.years) do
         for month, month_table in pairs(year_table.months) do
-            revenue_table = {}
             local month_key = ""
             if month < 10 then
                 month_key = "0" .. month .. "-" .. year
@@ -210,6 +209,7 @@ function transaction_table.daily_revenues()
                 month_key = month .. "-" .. year
             end
             for day, day_table in pairs(month_table.days) do
+                local revenue_table = {}
                 local revenue = 0
                 local day_key = ""
                 if day < 10 then
@@ -235,7 +235,7 @@ function transaction_table.yearly_expenses()
     local yearly = {}
 
     for year, year_table in pairs(transaction_table.years) do
-        expense_table = {}
+        local expense_table = {}
         local expense = 0
         local year_key = ""
         year_key = year
@@ -253,7 +253,7 @@ function transaction_table.monthly_expenses()
 
     for year, year_table in pairs(transaction_table.years) do
         for month, month_table in pairs(year_table.months) do
-            expense_table = {}
+            local expense_table = {}
             local expense = 0
             local month_key = ""
             if month < 10 then
@@ -276,7 +276,6 @@ function transaction_table.daily_expenses()
 
     for year, year_table in pairs(transaction_table.years) do
         for month, month_table in pairs(year_table.months) do
-            expense_table = {}
             local month_key = ""
             if month < 10 then
                 month_key = "0" .. month .. "-" .. year
@@ -284,6 +283,7 @@ function transaction_table.daily_expenses()
                 month_key = month .. "-" .. year
             end
             for day, day_table in pairs(month_table.days) do
+                local expense_table = {}
                 local expense = 0
                 local day_key = ""
                 if day < 10 then
