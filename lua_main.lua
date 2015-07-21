@@ -5,9 +5,9 @@ local parse = require "parse_functions"
 local trans_table = require "transaction_table"
 local analysis = require "analysis"
 
-function lua_main.init()
+function lua_main.init(filename)
     parsed_lines = {}
-    if not parse.parse_file(instructions.nordea, "test.txt", parsed_lines) then
+    if not parse.parse_file(instructions.nordea, filename, parsed_lines) then
         return
     end
 
