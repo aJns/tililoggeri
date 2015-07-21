@@ -1,28 +1,37 @@
 import lupa
 from lupa import LuaRuntime
 
-lua = LuaRuntime(unpack_returned_tuples=True)
+from tkinter import Tk, Label
+from DrawFrame import DrawFrame
+from TextFrame import TextFrame
 
-lua_main = lua.eval("require 'lua_main'")
+def main():
 
-lua_main.init("test.txt")
-analysis = lua_main.get_analysis()
-transaction_table = lua_main.get_trans_table()
+    lua = LuaRuntime(unpack_returned_tuples=True)
 
-# print("Average sum:      ", analysis.month.avg_sum)
-# print("Average revenue:  ", analysis.month.avg_rev)
-# print("Average expense:  ", analysis.month.avg_exp)
+    lua_main = lua.eval("require 'lua_main'")
 
-# print("Median sum:      ", analysis.month.med_sum)
-# print("Median revenue:  ", analysis.month.med_rev)
-# print("Median expense:  ", analysis.month.med_exp)
+    lua_main.init("test.txt")
+    analysis = lua_main.get_analysis()
+    transaction_table = lua_main.get_trans_table()
 
-# print("Current sum:      ", analysis.current_month.sum)
-# print("Current revenue:  ", analysis.current_month.rev)
-# print("Current expense:  ", analysis.current_month.exp)
+    avgSumStr = ("Average sum:      " + str(analysis.month.avg_sum))
+    avgRevStr = ("Average revenue:  " + str(analysis.month.avg_rev))
+    avgExpStr = ("Average expense:  " + str(analysis.month.avg_exp))
 
-print(transaction_table.get_sum(2015, 7, 7))
-print(transaction_table.get_sum(2015, 7, 1))
-print(transaction_table.get_sum(2015, 7, 2))
-print(transaction_table.get_sum(2015, 7, 3))
-print(transaction_table.get_sum(2015, 7, 4))
+    medSumStr = ("Median sum:      " + str(analysis.month.med_sum))
+    medRevStr = ("Median revenue:  " + str(analysis.month.med_rev))
+    medExpStr = ("Median expense:  " + str(analysis.month.med_exp))
+
+    curSumStr = ("Current sum:      " + str(analysis.current_month.sum))
+    curRevStr = ("Current revenue:  " + str(analysis.current_month.rev))
+    curExpStr = ("Current expense:  " + str(analysis.current_month.exp))
+
+    root = Tk()
+    # graphs = DrawFrame(root)
+    text = TextFrame(root, analysis)
+    root.geometry("400x100+300+300")
+    root.mainloop()  
+
+
+main()
