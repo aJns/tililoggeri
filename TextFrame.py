@@ -19,6 +19,32 @@ class TextFrame(Frame):
         self.parent.title("Text")        
         self.pack(fill=BOTH, expand=1)
 
-        avgSumStr = ("Average sum:      " + str(self.analysis.month.avg_sum))
-        avgSumLab = Label(self, text=avgSumStr)
-        avgSumLab.pack()
+        analysis = self.analysis
+
+        avgSumStr = ("Average sum:      " + str(analysis.month.avg_sum))
+        avgRevStr = ("Average revenue:  " + str(analysis.month.avg_rev))
+        avgExpStr = ("Average expense:  " + str(analysis.month.avg_exp))
+
+        medSumStr = ("Median sum:      " + str(analysis.month.med_sum))
+        medRevStr = ("Median revenue:  " + str(analysis.month.med_rev))
+        medExpStr = ("Median expense:  " + str(analysis.month.med_exp))
+
+        curSumStr = ("Current sum:      " + str(analysis.current_month.sum))
+        curRevStr = ("Current revenue:  " + str(analysis.current_month.rev))
+        curExpStr = ("Current expense:  " + str(analysis.current_month.exp))
+
+        superString = (avgSumStr
+                +  "\n" + avgRevStr
+                +  "\n" + avgExpStr
+
+                +  "\n" + medSumStr
+                +  "\n" + medRevStr
+                +  "\n" + medExpStr
+
+                +  "\n" + curSumStr
+                +  "\n" + curRevStr
+                +  "\n" + curExpStr
+                )
+
+        superLabel = Label(self, text=superString)
+        superLabel .pack()
