@@ -20,5 +20,3 @@ transaction_table = lua_main.get_trans_table()
 # print("Current sum:      ", analysis.current_month.sum)
 # print("Current revenue:  ", analysis.current_month.rev)
 # print("Current expense:  ", analysis.current_month.exp)
-
-transaction_table.daily_sums()

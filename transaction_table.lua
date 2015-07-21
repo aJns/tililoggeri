@@ -303,4 +303,10 @@ function transaction_table.daily_expenses()
 end
 -- expense functions
 
+-- Get the sum on the given day. If day nil, give monthly sum, the same for
+-- year if month nil.
+function transaction_table.get_sum(year, month, day)
+    -- TODO: Function body
+end
+
 return transaction_table
