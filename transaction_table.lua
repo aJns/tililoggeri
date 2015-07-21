@@ -305,8 +305,26 @@ end
 
 -- Get the sum on the given day. If day nil, give monthly sum, the same for
 -- year if month nil.
-function transaction_table.get_sum(year, month, day)
-    -- TODO: Function body
+function transaction_table.get_sum(yearStr, monthStr, dayStr)
+    local year = transaction_table.years[yearStr]
+    if year == nil then
+        return nil
+    end
+    if monthStr == nil then
+        return year.sum
+    end
+    local month = year.months[monthStr]
+    if month == nil then
+        return nil
+    end
+    if dayStr == nil then
+        return month.sum
+    end
+    local day = month.days[dayStr]
+    if day == nil then
+        return nil
+    end
+    return day.sum
 end
 
 return transaction_table
