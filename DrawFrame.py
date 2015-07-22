@@ -1,11 +1,6 @@
 from tkinter import Canvas, Frame, BOTH
 from datetime import datetime, timedelta
 
-BAR_WIDTH = 1
-BAR_SPACING = BAR_WIDTH + 2
-VERTICAL_BIAS = 500
-SUM_GAIN = -0.05
-
 class DrawFrame(Frame):
 
     def __init__(self, parent, transaction_table):
@@ -18,6 +13,7 @@ class DrawFrame(Frame):
         self.last_date = datetime(date_table.year, date_table.month, date_table.day)
 
         self.trans_table = transaction_table
+        self.set_graph_limits()
 
         self.parent = parent        
         self.initUI()
@@ -31,7 +27,7 @@ class DrawFrame(Frame):
 
         date = self.first_date
         i = 1
-        totalSum = 0
+        total_sum = 0
         while(date < self.last_date):
             date += timedelta(days=1)
             year = date.year
@@ -39,22 +35,51 @@ class DrawFrame(Frame):
             day = date.day
 
             if self.trans_table.get_sum(year, month, day) != None:
-                totalSum += self.trans_table.get_sum(year, month, day)
+                total_sum += self.trans_table.get_sum(year, month, day)
 
-            xCoord1 = BAR_SPACING * i
-            xCoord2 = BAR_SPACING * i + BAR_WIDTH
-            yCoord1 = VERTICAL_BIAS
-            yCoord2 = totalSum
+            x_coord1 = self.bar_spacing * i
+            x_coord2 = x_coord1 + self.bar_width
+            y_coord1 = self.vertical_bias
+            y_coord2 = total_sum
 
-            if yCoord2 == None: 
-                yCoord2 = yCoord1
+            if y_coord2 == None: 
+                y_coord2 = y_coord1
             else:
-                yCoord2 = yCoord2 * SUM_GAIN + yCoord1
+                y_coord2 = y_coord2 * self.sum_gain + y_coord1
 
             # Draw the totalSum on every other day
             if (day % 2) == 0:
                 i += 1
-                canvas.create_rectangle(xCoord1, yCoord1, xCoord2, yCoord2, 
+                canvas.create_rectangle(x_coord1, y_coord1, x_coord2, y_coord2, 
                         outline="#fb0", fill="#fb0")
 
         canvas.pack(fill=BOTH, expand=1)
+
+    def set_graph_limits(self):
+        self.bar_width = 1
+        self.bar_spacing = self.bar_width + 2
+        self.vertical_bias = 300
+        self.sum_gain = -0.05
+
+        date = self.first_date
+        total_sum = 0
+        highest_sum = 0
+        lowest_sum = 0
+        while(date < self.last_date):
+            date += timedelta(days=1)
+            year = date.year
+            month = date.month
+            day = date.day
+
+            if self.trans_table.get_sum(year, month, day) != None:
+                total_sum += self.trans_table.get_sum(year, month, day)
+
+            if total_sum > highest_sum:
+                highest_sum = total_sum
+                print(highest_sum)
+ 
+            if total_sum < lowest_sum:
+                lowest_sum = total_sum
+                print(lowest_sum)
+
+        self.sum_gain = -((self.vertical_bias * 0.9) / highest_sum)
