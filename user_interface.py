@@ -28,7 +28,7 @@ def main():
     curExpStr = ("Current expense:  " + str(analysis.current_month.exp))
 
     root = Tk()
-    # graphs = DrawFrame(root)
+    graphs = DrawFrame(root, transaction_table)
     text = TextFrame(root, analysis)
     root.geometry("400x100+300+300")
     root.mainloop()  
