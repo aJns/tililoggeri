@@ -3,8 +3,8 @@ from datetime import datetime, timedelta
 
 BAR_WIDTH = 1
 BAR_SPACING = BAR_WIDTH + 2
-VERTICAL_BIAS = 200
-SUM_GAIN = -0.25
+VERTICAL_BIAS = 500
+SUM_GAIN = -0.05
 
 class DrawFrame(Frame):
 
@@ -30,26 +30,31 @@ class DrawFrame(Frame):
         canvas = Canvas(self)
 
         date = self.first_date
-        i = 0
+        i = 1
+        totalSum = 0
         while(date < self.last_date):
             date += timedelta(days=1)
             year = date.year
             month = date.month
             day = date.day
 
-            i += 1
+            if self.trans_table.get_sum(year, month, day) != None:
+                totalSum += self.trans_table.get_sum(year, month, day)
 
             xCoord1 = BAR_SPACING * i
             xCoord2 = BAR_SPACING * i + BAR_WIDTH
             yCoord1 = VERTICAL_BIAS
-            yCoord2 = self.trans_table.get_sum(year, month, day)
+            yCoord2 = totalSum
 
             if yCoord2 == None: 
                 yCoord2 = yCoord1
             else:
                 yCoord2 = yCoord2 * SUM_GAIN + yCoord1
 
-            canvas.create_rectangle(xCoord1, yCoord1, xCoord2, yCoord2, 
-                    outline="#fb0", fill="#fb0")
+            # Draw the totalSum on every other day
+            if (day % 2) == 0:
+                i += 1
+                canvas.create_rectangle(xCoord1, yCoord1, xCoord2, yCoord2, 
+                        outline="#fb0", fill="#fb0")
 
         canvas.pack(fill=BOTH, expand=1)

@@ -16,8 +16,8 @@ def main():
     transaction_table = lua_main.get_trans_table()
 
     root = Tk()
-    graphs = DrawFrame(root, transaction_table)
     text = TextFrame(root, analysis)
+    graphs = DrawFrame(root, transaction_table)
     root.geometry("400x100+300+300")
     root.mainloop()  
 

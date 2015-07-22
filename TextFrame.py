@@ -1,4 +1,4 @@
-from tkinter import Label, Frame, BOTH
+from tkinter import Label, Frame, BOTH, W, LEFT
 
 import lupa
 from lupa import LuaRuntime
@@ -17,7 +17,7 @@ class TextFrame(Frame):
     def initUI(self):
 
         self.parent.title("Text")        
-        self.pack(fill=BOTH, expand=1)
+        self.pack(fill=BOTH, side=LEFT)
 
         analysis = self.analysis
 
@@ -46,5 +46,5 @@ class TextFrame(Frame):
                 +  "\n" + curExpStr
                 )
 
-        superLabel = Label(self, text=superString)
-        superLabel .pack()
+        superLabel = Label(self, text=superString, anchor=W, justify=LEFT)
+        superLabel.pack()
