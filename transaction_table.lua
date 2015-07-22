@@ -327,4 +327,96 @@ function transaction_table.get_sum(yearStr, monthStr, dayStr)
     return day.sum
 end
 
+-- Sets year, month and day to the first appearing date
+function transaction_table.first_day()
+    local years = tablex.keys(transaction_table.years)
+    local year = years[1]
+    while tablex.size(years) > 1 do
+        for i, key in pairs(years) do
+            if tonumber(key) < tonumber(year) then
+                year = key
+            else
+                years[i] = nil
+            end
+        end
+    end
+
+    local months = tablex.keys(transaction_table.years[year].months)
+    local month = months[1]
+    while tablex.size(months) > 1 do
+        for i, key in pairs(months) do
+            if tonumber(key) < tonumber(month) then
+                month = key
+            else
+                months[i] = nil
+            end
+        end
+    end
+
+    local days = tablex.keys(transaction_table.years[year].months[month].days)
+    local day = days[1]
+    while tablex.size(days) > 1 do
+        for i, key in pairs(days) do
+            if tonumber(key) < tonumber(day) then
+                day = key
+            else
+                days[i] = nil
+            end
+        end
+    end
+
+    date_table = {}
+    date_table.year = year
+    date_table.month = month
+    date_table.day = day
+
+    return date_table
+end
+
+-- Sets year, month and day to the last appearing date
+function transaction_table.last_day()
+    local years = tablex.keys(transaction_table.years)
+    local year = years[1]
+    while tablex.size(years) > 1 do
+        for i, key in pairs(years) do
+            if tonumber(key) > tonumber(year) then
+                year = key
+            else
+                years[i] = nil
+            end
+        end
+    end
+
+    local months = tablex.keys(transaction_table.years[year].months)
+    local month = months[1]
+    while tablex.size(months) > 1 do
+        for i, key in pairs(months) do
+            if tonumber(key) > tonumber(month) then
+                month = key
+            else
+                months[i] = nil
+            end
+        end
+    end
+
+    local days = tablex.keys(transaction_table.years[year].months[month].days)
+    local day = days[1]
+    while tablex.size(days) > 1 do
+        for i, key in pairs(days) do
+            if tonumber(key) > tonumber(day) then
+                day = key
+            else
+                days[i] = nil
+            end
+        end
+    end
+
+    date_table = {}
+    date_table.year = year
+    date_table.month = month
+    date_table.day = day
+
+    return date_table
+end
+
 return transaction_table

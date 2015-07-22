@@ -1,8 +1,8 @@
 from tkinter import Canvas, Frame, BOTH
 from datetime import datetime, timedelta
 
-BAR_WIDTH = 10
-BAR_SPACING = 5
+BAR_WIDTH = 1
+BAR_SPACING = BAR_WIDTH + 2
 VERTICAL_BIAS = 200
 SUM_GAIN = -0.25
 
@@ -10,6 +10,12 @@ class DrawFrame(Frame):
 
     def __init__(self, parent, transaction_table):
         Frame.__init__(self, parent)   
+
+        date_table = transaction_table.first_day()
+        self.first_date = datetime(date_table.year, date_table.month, date_table.day)
+
+        date_table = transaction_table.last_day()
+        self.last_date = datetime(date_table.year, date_table.month, date_table.day)
 
         self.trans_table = transaction_table
 
@@ -23,12 +29,15 @@ class DrawFrame(Frame):
 
         canvas = Canvas(self)
 
-        date = datetime(2015, 1, 1)
-        for i in range(60):
+        date = self.first_date
+        i = 0
+        while(date < self.last_date):
             date += timedelta(days=1)
             year = date.year
             month = date.month
             day = date.day
+
+            i += 1
 
             xCoord1 = BAR_SPACING * i
             xCoord2 = BAR_SPACING * i + BAR_WIDTH
@@ -39,7 +48,6 @@ class DrawFrame(Frame):
                 yCoord2 = yCoord1
             else:
                 yCoord2 = yCoord2 * SUM_GAIN + yCoord1
-                print(yCoord2)
 
             canvas.create_rectangle(xCoord1, yCoord1, xCoord2, yCoord2, 
                     outline="#fb0", fill="#fb0")
